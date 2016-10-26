@@ -32,7 +32,6 @@ Front Camera | 8MP (OV)
 ### In progress(only for cm-14.0):
  * Hardware acceleration
  * Wi-Fi
- * Fast charging
  * Offline charging
  * GPS
  * AGPS
