@@ -90,7 +90,6 @@ public class MT6755 extends RIL implements CommandsInterface {
     }
 
 
-    @Override
     protected void
     processUnsolicited (Parcel p) {
         Object ret;
@@ -259,7 +258,6 @@ public class MT6755 extends RIL implements CommandsInterface {
         return response;
     }
 
-    @Override
     public void
     setupDataCall(String radioTechnology, String profile, String apn,
             String user, String password, String authType, String protocol,
@@ -380,7 +378,6 @@ public class MT6755 extends RIL implements CommandsInterface {
     }
 
     // Solicited request handling
-    @Override
     protected RILRequest
     processSolicited (Parcel p) {
         int serial, error;
