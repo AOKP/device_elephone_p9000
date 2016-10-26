@@ -61,6 +61,7 @@ Front Camera | 8MP (OV)
  * RIL improvment for some users
  * Enforcing SELinux
  * FMRadio with enforcing SELinux
+ * PE and PE+ (fast charging)
 
 ### Thanks to:
  * CyanogenMod team
