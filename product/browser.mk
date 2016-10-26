@@ -1,3 +1,3 @@
-# Browser
+# Package
 PRODUCT_PACKAGES += \
     Gello

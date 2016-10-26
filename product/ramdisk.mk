@@ -1,4 +1,4 @@
-# Ramdisk
+# Ramdisk files
 PRODUCT_PACKAGES += \
     enableswap.sh \
     factory_init.project.rc \

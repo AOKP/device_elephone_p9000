@@ -1,3 +1,3 @@
-# Charger
+# Package
 PRODUCT_PACKAGES += \
     charger

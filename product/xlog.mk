@@ -1,3 +1,3 @@
-# Xlog
+# Package
 PRODUCT_PACKAGES += \
 	libxlog

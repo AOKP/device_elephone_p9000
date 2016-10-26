@@ -1,4 +1,10 @@
-# Audio
+# Configurations
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/audio/audio_device.xml:system/etc/audio_device.xml \
+    $(LOCAL_PATH)/audio/audio_em.xml:system/etc/audio_em.xml
+
+# Packages
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
@@ -8,8 +14,3 @@ PRODUCT_PACKAGES += \
     libaudiopolicymanagerdefault \
     libtinycompress \
     libtinyxml
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/audio_device.xml:system/etc/audio_device.xml \
-    $(LOCAL_PATH)/audio/audio_em.xml:system/etc/audio_em.xml
