@@ -29,7 +29,7 @@ Front Camera | 8MP (OV)
 
 # Build Information
 
-### Working:
+### In progress(only for cm-14.0):
  * Hardware acceleration
  * Wi-Fi
  * Fast charging
