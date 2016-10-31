@@ -26,6 +26,9 @@ include $(LOCAL_PATH)/board/*.mk
 
 #######################################################################
 
+# CM 14.1 temp
+TARGET_DISABLE_CMSDK := true
+
 # Kernel
 TARGET_KMODULES := true
 TARGET_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
