@@ -90,8 +90,9 @@ public class MT6755 extends RIL implements CommandsInterface {
     }
 
 
+    @Override
     protected void
-    processUnsolicited (Parcel p) {
+    processUnsolicited (Parcel p, int type) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
@@ -107,7 +108,7 @@ public class MT6755 extends RIL implements CommandsInterface {
                 // Rewind the Parcel
                 p.setDataPosition(dataPosition);
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
+                super.processUnsolicited(p, type);
                 return;
         }
         switch(response) {
@@ -258,9 +259,10 @@ public class MT6755 extends RIL implements CommandsInterface {
         return response;
     }
 
+    @Override
     public void
-    setupDataCall(String radioTechnology, String profile, String apn,
-            String user, String password, String authType, String protocol,
+    setupDataCall(int radioTechnology, int profile, String apn,
+            String user, String password, int authType, String protocol,
             Message result) {
         int interfaceId=0;
         RILRequest rr
@@ -378,8 +380,9 @@ public class MT6755 extends RIL implements CommandsInterface {
     }
 
     // Solicited request handling
+    @Override
     protected RILRequest
-    processSolicited (Parcel p) {
+    processSolicited (Parcel p, int type) {
         int serial, error;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         serial = p.readInt();
@@ -420,7 +423,7 @@ public class MT6755 extends RIL implements CommandsInterface {
             p.setDataPosition(dataPosition);
 
             // Forward responses that we are not overriding to the super class
-            return super.processSolicited(p);
+            return super.processSolicited(p, type);
         }
 
 
