@@ -15,7 +15,7 @@ cd Working_dir
 After apply patches:
 sh device/elephone/p9000/patches/install.sh
 Write:
-(temp)export USE_NINJA=false
+(temp)export USE_NINJA=false && unset BUILDING_WITH_NINJA
 . build/envsetup.sh && breakfast p9000
 brunch p9000
 Wait of finish, for me ~2hr
