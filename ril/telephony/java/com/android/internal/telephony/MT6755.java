@@ -270,12 +270,12 @@ public class MT6755 extends RIL implements CommandsInterface {
 
         rr.mParcel.writeInt(8); //bumped by one
 
-        rr.mParcel.writeString(radioTechnology);
-        rr.mParcel.writeString(profile);
+        rr.mParcel.writeInt(radioTechnology);
+        rr.mParcel.writeInt(profile);
         rr.mParcel.writeString(apn);
         rr.mParcel.writeString(user);
         rr.mParcel.writeString(password);
-        rr.mParcel.writeString(authType);
+        rr.mParcel.writeInt(authType);
         rr.mParcel.writeString(protocol);
 
         /* Find the first available interfaceId */
