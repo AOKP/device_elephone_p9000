@@ -205,4 +205,9 @@
 
     <!-- Mediatek radios are why this option exists... :/ -->
     <bool name="config_user_notification_of_restrictied_mobile_access">false</bool>
+    
+    <!-- True if the device supports at least one form of multi-window.
+         E.g. freeform, split-screen, picture-in-picture. -->
+    <bool name="config_supportsMultiWindow">true</bool>
+ 
 </resources>
