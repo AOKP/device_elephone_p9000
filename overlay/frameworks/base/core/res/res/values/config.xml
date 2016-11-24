@@ -284,10 +284,6 @@
          E.g. freeform, split-screen, picture-in-picture. -->
     <bool name="config_supportsMultiWindow">true</bool>
 
-    <!-- Do the battery/notification LEDs support pulsing?
-         Used to decide if we show pulse settings -->
-    <bool name="config_ledCanPulse">true</bool>
-
     <!-- The list absolute paths of jar/apk files containing the device specific handlers,
          delimited by File.pathSeparator, which defaults to ":" on Android -->
     <string name="config_deviceKeyHandlerLib" translatable="false">/system/framework/com.cyanogenmod.keyhandler.jar</string>
