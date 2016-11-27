@@ -8,9 +8,7 @@ struct xlog_record {
 
 static void init(void) __attribute__ ((constructor));
 
-void init(void)
-{
-}
+void init(void){}
 
 int __xlog_buf_printf(int bufid, const struct xlog_record *rec, ...)
 {
