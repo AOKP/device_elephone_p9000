@@ -8,6 +8,9 @@ BOARD_MKBOOTIMG_ARGS := --board 1465391499 --ramdisk_offset 0x04f88000 --second_
 # Kernel properties
 TARGET_KERNEL_SOURCE := kernel/elephone/p9000
 TARGET_KERNEL_CONFIG := lineage_p9000_defconfig
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_ARCH := arm64		
+TARGET_KERNEL_HEADER_ARCH := arm64
 
 
 # USED TO BUILD WITH PREBUILD KERNEL
