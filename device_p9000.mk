@@ -37,3 +37,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Vendor product configurations
 $(call inherit-product-if-exists, vendor/elephone/p9000/p9000-vendor.mk)
+
+# Boot animation
+TARGET_SCREEN_HEIGHT      := 1920
+TARGET_SCREEN_WIDTH       := 1080
+TARGET_BOOTANIMATION_NAME := 1080
+
+PRODUCT_DEFAULT_LANGUAGE := en
+PRODUCT_DEFAULT_REGION := US
