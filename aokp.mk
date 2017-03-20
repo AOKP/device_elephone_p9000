@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-# Inherit some common AICP stuff.
+# Inherit some common CM stuff.
 $(call inherit-product, vendor/aokp/configs/common_full_phone.mk)
 
 # Inherit device configuration

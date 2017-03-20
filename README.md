@@ -30,43 +30,45 @@ Front Camera | 8MP (OV)
 # Build Information
 
 ### Working:
- * All sensors
+ * Hardware acceleration
+ * Wi-Fi
+ * Offline charging
+ * GPS
+ * AGPS
+ * Vibration
  * Audio
  * Auto brightness
+ * Doze
+ * RAM and ROM
+ * Rotation
+ * All sensors
+ * NFC (payments, pairing .etc)
+ * Lazer autofocus
+ * Flashlight (statusbar and camera)
  * Bluetooth
  * Camera rear/front (video and photo)
- * Doze 
- * Enforcing SELinux
- * Fingerprint scanner
- * Flashlight (statusbar and camera)
- * GPS
- * Hardware acceleration
- * HOME Button like in stock
- * Lazer autofocus
  * Micro SD support
  * MTP and Mass Storage modes
- * NFC (payments, pairing .etc)
- * Offline charging
- * RAM and ROM
- * RIL
- * Rotation
- * Special button new functional
- * Vibration 
- * Wi-Fi 
+ * Audio over Bluetooth (music, calls .etc)
+ * Fingerprint scanner
  * Wi-Fi tethering
+ * HOME Button like in stock
+ * Special button new functional
 
 ### In progress:
- * Audio over Bluetooth (music, calls .etc)
  * Force close camera with HDR on
+ * RIL improvment for some users
+ * Enforcing SELinux
+ * FMRadio with enforcing SELinux
  * PE and PE+ (fast charging)
 
 ### Thanks to:
  * CyanogenMod team
- * Deepflex
  * Wuxianlin
  * Ferhung
  * SHVED
  * Xen0n
+ * Leskal
  * JonnyXDA
  * olegsvs
  * Visi0nary
