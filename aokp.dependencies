@@ -7,8 +7,8 @@
   },
   {
     "remote": "github",
-    "repository": "aokp/kernel_elephone_p9000",
+    "repository": "tribual/android_kernel_elephone_p9000",
     "target_path": "kernel/elephone/p9000",
-    "branch": "mm"
+    "branch": "aokp6"
   }
 ] 
