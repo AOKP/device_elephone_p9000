@@ -41,6 +41,3 @@ ro.config.max_starting_bg=3
 
 # Use 3 threads max for dex2oat
 ro.sys.fw.dex2oat_thread_count=3
-
-#AOKP Device Maintainers
-ro.aokp.maintainer=tribual
