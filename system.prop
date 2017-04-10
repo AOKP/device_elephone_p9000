@@ -26,7 +26,7 @@ wifi.direct.interface=p2p0
 
 # Graphics
 ro.opengles.version=196608
-ro.sf.lcd_density=480
+ro.sf.lcd_density=400
 
 # FRP
 ro.frp.pst=/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/frp
