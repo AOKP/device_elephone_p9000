@@ -112,3 +112,9 @@ allow shell aee_exp_data_file:file r_file_perms;
 # Operation : Migration
 # Purpose: Allow shell to read binder from surfaceflinger
 allow shell surfaceflinger:fifo_file {read write};
+
+#Fix denials
+allow shell dalvikcache_data_file:file rw_file_perms;
+allow shell dalvikcache_data_file:dir rw_dir_perms;
+
+allow shell shell:capability { sys_nice };
