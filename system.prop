@@ -49,3 +49,9 @@ ro.sys.fw.dex2oat_thread_count=3
 # Camera HAL
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
+
+# Tweaks and Add On's
+ro.media.enc.jpeg.quality=100
+ro.ril.enable.amr.wideband=1
+ring.delay=0
+ro.config.ringtone_2=Orion.ogg

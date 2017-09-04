@@ -2,11 +2,13 @@
   {
     "remote": "github",
     "repository": "leskal/android_vendor_elephone_p9000",
-    "target_path": "vendor/elephone/p9000"
+    "target_path": "vendor/elephone/p9000",
+    "branch": "cm-14.1-TEST"
   },
   {
     "remote": "github",
     "repository": "leskal/android_kernel_elephone_p9000",
-    "target_path": "kernel/elephone/p9000"
+    "target_path": "kernel/elephone/p9000",
+    "branch": "open-source"
   }
 ] 
