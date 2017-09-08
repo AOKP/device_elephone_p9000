@@ -1,6 +1,5 @@
 # Camera
 USE_CAMERA_STUB := true
-TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY := mtkcamera_parameters
 
 # Legacy HAL
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
