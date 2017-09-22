@@ -324,6 +324,7 @@
 /dev/audio_ipi(/.*)? u:object_r:audio_ipi_device:s0
 /dev/irtx u:object_r:irtx_device:s0
 /dev/ir-learning u:object_r:irrx_device:s0
+/dev/spm(/.*)? u:object_r:spm_device:s0
 
 /dev/xt_qtaguid(/.*)? u:object_r:xt_qtaguid_device:s0
 /dev/pmic_ftm(/.*)? u:object_r:pmic_ftm_device:s0
@@ -509,6 +510,7 @@
 /system/bin/starter u:object_r:starter_exec:s0
 /system/bin/stroke u:object_r:stroke_exec:s0
 /system/bin/istd8303 u:object_r:istd8303_exec:s0
+/system/bin/spm_loader u:object_r:spm_loader_exec:s0
 /system/bin/vtservice u:object_r:vtservice_exec:s0
 /system/bin/hotknot_native_service u:object_r:hotknot_native_exec:s0
 /system/bin/teei_daemon u:object_r:teei_daemon_exec:s0
@@ -538,12 +540,3 @@
 # aka.jiang add for fingerprint ET3XX 20160308
 /system/bin/etsd  u:object_r:etsd_exec:s0
 /dev/esfp0       u:object_r:etsd_data_file:s0
-
-
-# Services
-/system/bin/spm_loader
-u:object_r:spm_loader_exec:s0
-
-# Hardware nodes
-/dev/spm
-u:object_r:spm_device:s0
