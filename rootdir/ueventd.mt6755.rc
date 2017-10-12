@@ -79,18 +79,19 @@
 /dev/ccci2_aud            0660   audio      audio
 /dev/ccci3_aud            0660   audio      audio
 /dev/eemcs_aud            0660   audio      audio
-
+/dev/irtx                 0660   system     system
 # SGX device node
 /dev/pvrsrvkm             0666   root       root
 /dev/pvr_sync             0666   root       root
 
 
+# LED
 /sys/devices/platform/leds-mt65xx/leds/green   delay_on      0664  system   system
-/sys/devices/platform/leds-mt65xx/leds/green   delay_off      0664  system   system
-/sys/devices/platform/leds-mt65xx/leds/red   delay_on      0664  system   system
-/sys/devices/platform/leds-mt65xx/leds/red   delay_off      0664  system   system
-/sys/devices/platform/leds-mt65xx/leds/blue   delay_on      0664  system   system
-/sys/devices/platform/leds-mt65xx/leds/blue   delay_off      0664  system   system
+/sys/devices/platform/leds-mt65xx/leds/green   delay_off     0664  system   system
+/sys/devices/platform/leds-mt65xx/leds/red     delay_on      0664  system   system
+/sys/devices/platform/leds-mt65xx/leds/red     delay_off     0664  system   system
+/sys/devices/platform/leds-mt65xx/leds/blue    delay_on      0664  system   system
+/sys/devices/platform/leds-mt65xx/leds/blue    delay_off     0664  system   system
 
 #GPIO
 /dev/mtgpio               0600   radio      root
@@ -118,5 +119,5 @@
 /dev/ttyACM0              0660   radio      radio
 
 #agold_guotuo_add for fingerprint
-/dev/madev0	0666	root	root
-/dev/esfp0	0666	root	root
+/dev/madev0	              0666   root       root
+/dev/esfp0	              0666	 root       root
