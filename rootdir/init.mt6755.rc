@@ -684,11 +684,11 @@ service ami304d /system/bin/ami304d
     disabled
     class main
 
-#service memsicd /system/bin/memsicd
-#     disabled
-#    user system
-#    group system
-#    class main
+service memsicd /system/bin/memsicd
+     disabled
+    user system
+    group system
+    class main
 
 service memsicd3416x /system/bin/memsicd3416x
      disabled
