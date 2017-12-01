@@ -66,3 +66,8 @@ PRODUCT_COPY_FILES += \
 # Power
 PRODUCT_PACKAGES += \
     power.mt6735
+    
+    # Prebuilt
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/camera/nougat/lib/libmtkcam_fwkutils.so:system/lib/libmtkcam_fwkutils.so \
+    $(LOCAL_PATH)/prebuilt/camera/nougat/lib64/libmtkcam_fwkutils.so:system/lib64/libmtkcam_fwkutils.so \

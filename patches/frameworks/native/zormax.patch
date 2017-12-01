@@ -1125,7 +1125,7 @@ index 04a8e41..127b774 100644
  #include <utils/String8.h>
  
 +#ifndef MTK_HARDWARE
- #include <gui/GraphicsEnv.h>
+ #include <include/gui/GraphicsEnv.h>
  
 +#endif
  #include <EGL/egl.h>
@@ -1171,7 +1171,7 @@ index ba99d0c..ae033e3 100644
  #include <android/dlext.h>
  #include <cutils/properties.h>
 +#ifndef MTK_HARDWARE
- #include <gui/GraphicsEnv.h>
+ #include <include/gui/GraphicsEnv.h>
  
 +#endif
  #include "driver.h"

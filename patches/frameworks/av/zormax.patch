@@ -636,9 +636,6 @@ index 8707d96..639cd5b 100644
 +    if (!strcmp(colorFormat, MtkCameraParameters::PIXEL_FORMAT_YUV420I)) {
 +       return OMX_COLOR_FormatYUV420Planar; // i420
 +    }
-+    if (!strcmp(colorFormat, CameraParameters::PIXEL_FORMAT_YUV420P) ) {
-+       return OMX_MTK_COLOR_FormatYV12;// YV12
-+    }
 +    return -1;
 +}
 +#endif
