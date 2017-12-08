@@ -555,24 +555,25 @@ index 92e2847..4856bec 100644
                      break;
                  }
  
-@@ -5142,6 +5171,16 @@ status_t ACodec::getPortFormat(OMX_U32 portIndex, sp<AMessage> &notify) {
-                             rect.nWidth = videoDef->nFrameWidth;
+@@ -5142,6 +5142,18 @@ status_t ACodec::getPortFormat(OMX_U32 portIndex, sp<AMessage> &notify) {
                              rect.nHeight = videoDef->nFrameHeight;
                          }
+ 
 +#ifdef MTK_HARDWARE
-+                    if (!strncmp(mComponentName.c_str(), "OMX.MTK.", 8) && mOMX->getConfig(
-+                                mNode, (OMX_INDEXTYPE) 0x7f00001c
-+                                 /* OMX_IndexVendorMtkOmxVdecGetCropInfo */,
-+                                 &rect, sizeof(rect)) != OK) {
-+                            rect.nLeft = 0;
-+                            rect.nTop = 0;
-+                            rect.nWidth = videoDef->nFrameWidth;
-+                            rect.nHeight = videoDef->nFrameHeight;
++                        if (!strncmp(mComponentName.c_str(), "OMX.MTK.", 8) && mOMX->getConfig(
++                                  mNode, (OMX_INDEXTYPE) 0x7f00001c
++                                  /* OMX_IndexVendorMtkOmxVdecGetCropInfo */,
++                                  &rect, sizeof(rect)) != OK) {
++                             rect.nLeft = 0;
++                             rect.nTop = 0;
++                             rect.nWidth = videoDef->nFrameWidth;
++                             rect.nHeight = videoDef->nFrameHeight;
 +                        }
 +#endif
- 
++
                          if (rect.nLeft < 0 ||
                              rect.nTop < 0 ||
+                             rect.nLeft + rect.nWidth > videoDef->nFrameWidth ||
 diff --git a/media/libstagefright/Android.mk b/media/libstagefright/Android.mk
 index e708f68..8c313f7 100644
 --- a/media/libstagefright/Android.mk
