@@ -161,7 +161,7 @@ index 35d3a7c..2e9769d 100644
 +}
 +
 +status_t AudioSystem::GetAudioCommand(int par1,int* par2)
-+
++{
 +#ifdef MTK_HARDWARE
 +    ALOGD("AudioSystem::GetAudioCommand");
 +    const sp<IAudioFlinger>& af = AudioSystem::get_audio_flinger();
@@ -561,13 +561,14 @@ index 92e2847..4856bec 100644
                          }
 +#ifdef MTK_HARDWARE
 +                    if (!strncmp(mComponentName.c_str(), "OMX.MTK.", 8) && mOMX->getConfig(
-+                            mNode, (OMX_INDEXTYPE) 0x7f00001c /* OMX_IndexVendorMtkOmxVdecGetCropInfo */,
-+                            &rect, sizeof(rect)) != OK) {
-+                        rect.nLeft = 0;
-+                        rect.nTop = 0;
-+                        rect.nWidth = videoDef->nFrameWidth;
-+                        rect.nHeight = videoDef->nFrameHeight;
-+                    }
++                                mNode, (OMX_INDEXTYPE) 0x7f00001c
++                                 /* OMX_IndexVendorMtkOmxVdecGetCropInfo */,
++                                 &rect, sizeof(rect)) != OK) {
++                            rect.nLeft = 0;
++                            rect.nTop = 0;
++                            rect.nWidth = videoDef->nFrameWidth;
++                            rect.nHeight = videoDef->nFrameHeight;
++                        }
 +#endif
  
                          if (rect.nLeft < 0 ||

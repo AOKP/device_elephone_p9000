@@ -11,7 +11,6 @@ Subject: [PATCH] MTK patches-CORE
  libcutils/Android.mk        |   5 +-
  libcutils/fs_config.c       |   2 +-
  libcutils/mtk_audioCompat.c |   4 +
- libcutils/mtk_xlog.cpp      |  27 ++++
  libnetutils/Android.mk      |   7 +
  libnetutils/ifc_utils.c     | 327 ++++++++++++++++++++++++++++++++++++++++++++
  libutils/Android.mk         |   4 +
@@ -19,7 +18,6 @@ Subject: [PATCH] MTK patches-CORE
  rootdir/init.rc             |  17 +++
  13 files changed, 429 insertions(+), 7 deletions(-)
  create mode 100644 libcutils/mtk_audioCompat.c
- create mode 100644 libcutils/mtk_xlog.cpp
  create mode 100644 libutils/MediatekHacks.cpp
 
 diff --git a/include/netutils/ifc.h b/include/netutils/ifc.h
@@ -92,24 +90,22 @@ index 8127e708d..cfccd8b86 100644
          free(mycon);
          free(fcon);
 diff --git a/libcutils/Android.mk b/libcutils/Android.mk
-index 7a922539f..c080b2d2a 100644
+index 7a922539f..5a73299ba 100644
 --- a/libcutils/Android.mk
 +++ b/libcutils/Android.mk
-@@ -102,6 +102,8 @@ LOCAL_SRC_FILES := $(libcutils_common_sources) \
+@@ -102,6 +102,7 @@ LOCAL_SRC_FILES := $(libcutils_common_sources) \
          qtaguid.c \
          trace-dev.c \
          uevent.c \
-+        mtk_xlog.cpp \
 +        mtk_audioCompat.c
  
  LOCAL_SRC_FILES_arm += arch-arm/memset32.S
  LOCAL_SRC_FILES_arm64 += arch-arm64/android_memset.S
-@@ -133,7 +135,8 @@ endif
+@@ -133,7 +134,7 @@ endif
  ifneq ($(ENABLE_SCHEDBOOST),)
  LOCAL_CFLAGS += -DUSE_SCHEDBOOST
  endif
 -LOCAL_CFLAGS += -Werror -Wall -Wextra -std=gnu90
-+#LOCAL_CFLAGS += -Werror -Wall -Wextra -std=gnu90
 +LOCAL_CFLAGS += -Wall -Wextra -std=gnu90
  LOCAL_CLANG := true
  LOCAL_SANITIZE := integer
@@ -137,57 +133,6 @@ index 000000000..7b00e646d
 +{
 +    return 0;
 +}
-diff --git a/libcutils/mtk_xlog.cpp b/libcutils/mtk_xlog.cpp
-new file mode 100644
-index 000000000..48abe313c
---- /dev/null
-+++ b/libcutils/mtk_xlog.cpp
-@@ -0,0 +1,27 @@
-+#include <cutils/log.h>
-+
-+extern "C" {
-+	struct xlog_record {
-+		const char *tag_str;
-+		const char *fmt_str;
-+		int prio;
-+	};
-+
-+	static void init(void) __attribute__ ((constructor));
-+
-+	void init(void){}
-+
-+	int __xlog_buf_printf(int bufid, const struct xlog_record *rec, ...)
-+	{
-+	  va_list args;
-+	  va_start(args, rec);
-+	  LOG_PRI_VA(rec->prio, rec->tag_str, rec->fmt_str, args);
-+	  va_end(args);
-+
-+	  return 0;
-+	}
-+
-+	void dl_unregister_notify_function(void){}
-+
-+	void dl_register_notify_function(int (*load_notify_function) (const char *name, uintptr_t address, uintptr_t size), int(*unload_notify_function) (const char *name, uintptr_t address)){}
-+}
-diff --git a/libnetutils/Android.mk b/libnetutils/Android.mk
-index ff899c0f5..8c5334909 100644
---- a/libnetutils/Android.mk
-+++ b/libnetutils/Android.mk
-@@ -15,6 +15,13 @@ LOCAL_MODULE := libnetutils
- 
- LOCAL_CFLAGS := -Werror
- 
-+ifeq ($(BOARD_HAS_MTK_HARDWARE),true)
-+LOCAL_CFLAGS += -DMTK_HARDWARE -Wno-unused-parameter
-+endif
-+
-+$(info TARGET_GLOBAL_CFLAGS: $(TARGET_GLOBAL_CFLAGS))
-+$(info LOCAL_CFLAGS: $(LOCAL_CFLAGS))
-+
- include $(BUILD_SHARED_LIBRARY)
- 
- include $(CLEAR_VARS)
 diff --git a/libnetutils/ifc_utils.c b/libnetutils/ifc_utils.c
 index 7739cf459..113fd08c9 100644
 --- a/libnetutils/ifc_utils.c
@@ -548,7 +493,7 @@ index 84bac32f9..3de912d76 100644
  endif
  LOCAL_CFLAGS += -Werror -fvisibility=protected
  
-+ifeq ($(TARGET_BOARD_PLATFORM),mt6753)
++ifeq ($(TARGET_BOARD_PLATFORM),mt6755)
 +LOCAL_SRC_FILES += MediatekHacks.cpp
 +endif
 +
@@ -579,32 +524,3 @@ index 000000000..0404a32cb
 +  _ZN7android9CallStack6updateEii(ignoreDepth, tid);
 + }
 +}
-diff --git a/rootdir/init.rc b/rootdir/init.rc
-index f48029ac0..24ed8003e 100644
---- a/rootdir/init.rc
-+++ b/rootdir/init.rc
-@@ -657,6 +657,23 @@ service healthd /sbin/healthd
-     seclabel u:r:healthd:s0
-     group root system wakelock
- 
-+service surfaceflinger /system/bin/surfaceflinger
-+    class core
-+    user root
-+    group graphics drmrpc
-+    onrestart restart zygote
-+
-+service drm /system/bin/drmserver
-+    class main
-+    user drm
-+    group drm system inet drmrpc
-+
-+service media /system/bin/mediaserver
-+    class main
-+    user root
-+    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm qcom_diag
-+    ioprio rt 4
-+
- service console /system/bin/sh
-     class core
-     console
-
