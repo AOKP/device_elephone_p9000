@@ -1125,9 +1125,9 @@ index 04a8e41..127b774 100644
  #include <utils/String8.h>
  
 +#ifndef MTK_HARDWARE
- #include <include/gui/GraphicsEnv.h>
- 
+ #include <gui/GraphicsEnv.h>
 +#endif
+
  #include <EGL/egl.h>
  
  // ----------------------------------------------------------------------------
@@ -1138,8 +1138,8 @@ index 04a8e41..127b774 100644
 +#ifndef MTK_HARDWARE
      void* mLibGui;
      decltype(android_getDriverNamespace)* mGetDriverNamespace;
- 
 +#endif
+
  public:
      ~Loader();
      
@@ -1171,7 +1171,7 @@ index ba99d0c..ae033e3 100644
  #include <android/dlext.h>
  #include <cutils/properties.h>
 +#ifndef MTK_HARDWARE
- #include <include/gui/GraphicsEnv.h>
+ #include <gui/GraphicsEnv.h>
  
 +#endif
  #include "driver.h"
@@ -1213,7 +1213,7 @@ index ba99d0c..ae033e3 100644
 +        return true;
 +    }
 +
-++#endif
++#endif
  
      hwvulkan_device_t* device;
      result =
