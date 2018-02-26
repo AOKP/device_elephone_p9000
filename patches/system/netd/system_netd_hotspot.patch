@@ -1,14 +1,3 @@
-From 860fdcb60768e18ceafe0017d02def2eba34e893 Mon Sep 17 00:00:00 2001
-From: Dhruv Gadhavi <dg28gadhavi@gmail.com>
-Date: Tue, 11 Jul 2017 18:54:39 +0530
-Subject: [PATCH] MTK patches-NETD
-
----
- server/NatController.cpp    |  7 +++-
- server/NetworkController.h  |  1 -
- server/SoftapController.cpp | 83 ++++++++++++++++++++++++++++++++++++++-------
- 3 files changed, 76 insertions(+), 15 deletions(-)
-
 diff --git a/server/NatController.cpp b/server/NatController.cpp
 index cda8f5f..d8be096 100644
 --- a/server/NatController.cpp
@@ -27,20 +16,8 @@ index cda8f5f..d8be096 100644
          rc = -1;
          goto err_rpfilter;
      }
-diff --git a/server/NetworkController.h b/server/NetworkController.h
-index 07e743c..195cdbd 100644
---- a/server/NetworkController.h
-+++ b/server/NetworkController.h
-@@ -113,7 +113,6 @@ class NetworkController {
-     std::map<unsigned, Network*> mNetworks;  // Map keys are NetIds.
-     std::map<uid_t, Permission> mUsers;
-     std::set<uid_t> mProtectableUsers;
--
- };
- 
- #endif  // NETD_SERVER_NETWORK_CONTROLLER_H
 diff --git a/server/SoftapController.cpp b/server/SoftapController.cpp
-index 1c59ec3..ea3a1f5 100755
+index 1c59ec3..dac6ae0 100755
 --- a/server/SoftapController.cpp
 +++ b/server/SoftapController.cpp
 @@ -37,6 +37,9 @@
@@ -53,7 +30,7 @@ index 1c59ec3..ea3a1f5 100755
  #include <netutils/ifc.h>
  #include <private/android_filesystem_config.h>
  #include "wifi.h"
-@@ -265,6 +269,11 @@ int SoftapController::setSoftap(int argc, char *argv[]) {
+@@ -265,6 +268,11 @@ int SoftapController::setSoftap(int argc, char *argv[]) {
      int hidden = 0;
      int channel = AP_CHANNEL_DEFAULT;
  
@@ -65,7 +42,7 @@ index 1c59ec3..ea3a1f5 100755
      if (argc < 5) {
          ALOGE("Softap set is missing arguments. Please use:");
          ALOGE("softap <wlan iface> <SSID> <hidden/broadcast> <channel> <wpa2?-psk|open> <passphrase>");
-@@ -275,21 +284,69 @@ int SoftapController::setSoftap(int argc, char *argv[]) {
+@@ -275,21 +283,69 @@ int SoftapController::setSoftap(int argc, char *argv[]) {
          hidden = 1;
  
      if (argc >= 5) {
@@ -127,7 +104,7 @@ index 1c59ec3..ea3a1f5 100755
 +                "eap_server=1\nwps_state=2\nconfig_methods=display physical_display push_button\n"
 +                "device_name=AndroidAP\nmanufacturer=MediaTek Inc.\nmodel_name=MTK Wireless Model\n"
 +                "model_number=66xx\nserial_number=1.0\ndevice_type=10-0050F204-5\n",
-+                "ap0", argv[3], channel, (channel <= 14) ? 'g' : 'a', hidden, atoi(argv[9]));
++                "wlan0", argv[3], channel, (channel <= 14) ? 'g' : 'a', hidden, atoi(argv[9]));
 +    } else {
 +        /* Without Hotspot Manager */
 +        wbuf = StringPrintf("interface=%s\n"
@@ -141,10 +118,12 @@ index 1c59ec3..ea3a1f5 100755
 +                "wowlan_triggers=any\n"
 +                "device_name=AndroidAP\nmanufacturer=MediaTek Inc.\nmodel_name=MTK Wireless Model\n"
 +                "model_number=66xx\nserial_number=1.0\ndevice_type=10-0050F204-5\n",
-+                "ap0", argv[3], channel, (channel <= 14) ? 'g' : 'a', hidden);
++                "wlan0", argv[3], channel, (channel <= 14) ? 'g' : 'a', hidden);
 +    }
 +#endif
  
      std::string fbuf;
      if (argc > 7) {
+-- 
+1.9.1
 
