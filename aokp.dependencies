@@ -3,12 +3,12 @@
     "remote": "github",
     "repository": "tribual/android_vendor_elephone_p9000",
     "target_path": "vendor/elephone/p9000",
-    "branch": "aokp7-av-test"
+    "branch": "aokp7"
   },
   {
     "remote": "github",
-    "repository": "leskal/android_kernel_elephone_p9000",
+    "repository": "tribual/android_kernel_elephone_p9000",
     "target_path": "kernel/elephone/p9000",
-    "branch": "open-source-new-TEST"
+    "branch": "aokp7"
   }
 ] 
