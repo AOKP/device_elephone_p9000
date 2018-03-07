@@ -1,5 +1,13 @@
+commit a9305ce0d5066a788fe467ee1d3e17114e7c8569
+Author: tribual <tribual@web.de>
+Date:   Tue Mar 6 16:16:41 2018 +0100
+
+    framework_av
+    
+    Change-Id: I10f50d3913ab99833f9f65401459434f9fd6fd4e
+
 diff --git a/camera/CameraParameters.cpp b/camera/CameraParameters.cpp
-index 76f92e715..38cdc5f97 100644
+index 76f92e7..38cdc5f 100644
 --- a/camera/CameraParameters.cpp
 +++ b/camera/CameraParameters.cpp
 @@ -93,6 +93,9 @@ const char CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED[] = "video-snapshot-su
@@ -13,7 +21,7 @@ index 76f92e715..38cdc5f97 100644
  const char CameraParameters::TRUE[] = "true";
  const char CameraParameters::FALSE[] = "false";
 diff --git a/camera/cameraserver/cameraserver.rc b/camera/cameraserver/cameraserver.rc
-index fea5a1d5c..08277d674 100644
+index fea5a1d..08277d6 100644
 --- a/camera/cameraserver/cameraserver.rc
 +++ b/camera/cameraserver/cameraserver.rc
 @@ -1,6 +1,6 @@
@@ -25,7 +33,7 @@ index fea5a1d5c..08277d674 100644
      ioprio rt 4
      writepid /dev/cpuset/camera-daemon/tasks /dev/stune/top-app/tasks
 diff --git a/include/camera/CameraParameters.h b/include/camera/CameraParameters.h
-index 74517b47b..d17a6a16d 100644
+index 74517b4..d17a6a1 100644
 --- a/include/camera/CameraParameters.h
 +++ b/include/camera/CameraParameters.h
 @@ -538,6 +538,9 @@ public:
@@ -40,47 +48,10 @@ index 74517b47b..d17a6a16d 100644
      static const char TRUE[];
 diff --git a/include/camera/MtkCamera.h b/include/camera/MtkCamera.h
 new file mode 100644
-index 000000000..9c023a7d4
+index 0000000..16bdd24
 --- /dev/null
 +++ b/include/camera/MtkCamera.h
-@@ -0,0 +1,275 @@
-+/* Copyright Statement:
-+ *
-+ * This software/firmware and related documentation ("MediaTek Software") are
-+ * protected under relevant copyright laws. The information contained herein is
-+ * confidential and proprietary to MediaTek Inc. and/or its licensors. Without
-+ * the prior written permission of MediaTek inc. and/or its licensors, any
-+ * reproduction, modification, use or disclosure of MediaTek Software, and
-+ * information contained herein, in whole or in part, shall be strictly
-+ * prohibited.
-+ *
-+ * MediaTek Inc. (C) 2010. All rights reserved.
-+ *
-+ * BY OPENING THIS FILE, RECEIVER HEREBY UNEQUIVOCALLY ACKNOWLEDGES AND AGREES
-+ * THAT THE SOFTWARE/FIRMWARE AND ITS DOCUMENTATIONS ("MEDIATEK SOFTWARE")
-+ * RECEIVED FROM MEDIATEK AND/OR ITS REPRESENTATIVES ARE PROVIDED TO RECEIVER
-+ * ON AN "AS-IS" BASIS ONLY. MEDIATEK EXPRESSLY DISCLAIMS ANY AND ALL
-+ * WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
-+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
-+ * NONINFRINGEMENT. NEITHER DOES MEDIATEK PROVIDE ANY WARRANTY WHATSOEVER WITH
-+ * RESPECT TO THE SOFTWARE OF ANY THIRD PARTY WHICH MAY BE USED BY,
-+ * INCORPORATED IN, OR SUPPLIED WITH THE MEDIATEK SOFTWARE, AND RECEIVER AGREES
-+ * TO LOOK ONLY TO SUCH THIRD PARTY FOR ANY WARRANTY CLAIM RELATING THERETO.
-+ * RECEIVER EXPRESSLY ACKNOWLEDGES THAT IT IS RECEIVER'S SOLE RESPONSIBILITY TO
-+ * OBTAIN FROM ANY THIRD PARTY ALL PROPER LICENSES CONTAINED IN MEDIATEK
-+ * SOFTWARE. MEDIATEK SHALL ALSO NOT BE RESPONSIBLE FOR ANY MEDIATEK SOFTWARE
-+ * RELEASES MADE TO RECEIVER'S SPECIFICATION OR TO CONFORM TO A PARTICULAR
-+ * STANDARD OR OPEN FORUM. RECEIVER'S SOLE AND EXCLUSIVE REMEDY AND MEDIATEK'S
-+ * ENTIRE AND CUMULATIVE LIABILITY WITH RESPECT TO THE MEDIATEK SOFTWARE
-+ * RELEASED HEREUNDER WILL BE, AT MEDIATEK'S OPTION, TO REVISE OR REPLACE THE
-+ * MEDIATEK SOFTWARE AT ISSUE, OR REFUND ANY SOFTWARE LICENSE FEES OR SERVICE
-+ * CHARGE PAID BY RECEIVER TO MEDIATEK FOR SUCH MEDIATEK SOFTWARE AT ISSUE.
-+ *
-+ * The following software/firmware and/or related documentation ("MediaTek
-+ * Software") have been modified by MediaTek Inc. All revisions are subject to
-+ * any receiver's applicable license agreements with MediaTek Inc.
-+ */
-+
+@@ -0,0 +1,238 @@
 +/*
 + * Copyright (C) 2008 The Android Open Source Project
 + *
@@ -321,47 +292,10 @@ index 000000000..9c023a7d4
 +#endif  //ANDROID_HARDWARE_MTK_CAMERA_H
 diff --git a/include/camera/MtkCameraParameters.h b/include/camera/MtkCameraParameters.h
 new file mode 100644
-index 000000000..4a349574d
+index 0000000..07f0548
 --- /dev/null
 +++ b/include/camera/MtkCameraParameters.h
-@@ -0,0 +1,364 @@
-+/* Copyright Statement:
-+ *
-+ * This software/firmware and related documentation ("MediaTek Software") are
-+ * protected under relevant copyright laws. The information contained herein is
-+ * confidential and proprietary to MediaTek Inc. and/or its licensors. Without
-+ * the prior written permission of MediaTek inc. and/or its licensors, any
-+ * reproduction, modification, use or disclosure of MediaTek Software, and
-+ * information contained herein, in whole or in part, shall be strictly
-+ * prohibited.
-+ *
-+ * MediaTek Inc. (C) 2010. All rights reserved.
-+ *
-+ * BY OPENING THIS FILE, RECEIVER HEREBY UNEQUIVOCALLY ACKNOWLEDGES AND AGREES
-+ * THAT THE SOFTWARE/FIRMWARE AND ITS DOCUMENTATIONS ("MEDIATEK SOFTWARE")
-+ * RECEIVED FROM MEDIATEK AND/OR ITS REPRESENTATIVES ARE PROVIDED TO RECEIVER
-+ * ON AN "AS-IS" BASIS ONLY. MEDIATEK EXPRESSLY DISCLAIMS ANY AND ALL
-+ * WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
-+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
-+ * NONINFRINGEMENT. NEITHER DOES MEDIATEK PROVIDE ANY WARRANTY WHATSOEVER WITH
-+ * RESPECT TO THE SOFTWARE OF ANY THIRD PARTY WHICH MAY BE USED BY,
-+ * INCORPORATED IN, OR SUPPLIED WITH THE MEDIATEK SOFTWARE, AND RECEIVER AGREES
-+ * TO LOOK ONLY TO SUCH THIRD PARTY FOR ANY WARRANTY CLAIM RELATING THERETO.
-+ * RECEIVER EXPRESSLY ACKNOWLEDGES THAT IT IS RECEIVER'S SOLE RESPONSIBILITY TO
-+ * OBTAIN FROM ANY THIRD PARTY ALL PROPER LICENSES CONTAINED IN MEDIATEK
-+ * SOFTWARE. MEDIATEK SHALL ALSO NOT BE RESPONSIBLE FOR ANY MEDIATEK SOFTWARE
-+ * RELEASES MADE TO RECEIVER'S SPECIFICATION OR TO CONFORM TO A PARTICULAR
-+ * STANDARD OR OPEN FORUM. RECEIVER'S SOLE AND EXCLUSIVE REMEDY AND MEDIATEK'S
-+ * ENTIRE AND CUMULATIVE LIABILITY WITH RESPECT TO THE MEDIATEK SOFTWARE
-+ * RELEASED HEREUNDER WILL BE, AT MEDIATEK'S OPTION, TO REVISE OR REPLACE THE
-+ * MEDIATEK SOFTWARE AT ISSUE, OR REFUND ANY SOFTWARE LICENSE FEES OR SERVICE
-+ * CHARGE PAID BY RECEIVER TO MEDIATEK FOR SUCH MEDIATEK SOFTWARE AT ISSUE.
-+ *
-+ * The following software/firmware and/or related documentation ("MediaTek
-+ * Software") have been modified by MediaTek Inc. All revisions are subject to
-+ * any receiver's applicable license agreements with MediaTek Inc.
-+ */
-+
+@@ -0,0 +1,327 @@
 +/*
 + * Copyright (C) 2008 The Android Open Source Project
 + *
@@ -690,7 +624,7 @@ index 000000000..4a349574d
 +
 +#endif
 diff --git a/include/media/MediaProfiles.h b/include/media/MediaProfiles.h
-index b1c7c15f8..80724da20 100644
+index b1c7c15..80724da 100644
 --- a/include/media/MediaProfiles.h
 +++ b/include/media/MediaProfiles.h
 @@ -34,7 +34,23 @@ enum camcorder_quality {
@@ -767,7 +701,7 @@ index b1c7c15f8..80724da20 100644
      CAMCORDER_QUALITY_VENDOR_START = 10000,
      CAMCORDER_QUALITY_VGA = 10000,
 diff --git a/include/media/stagefright/ACodec.h b/include/media/stagefright/ACodec.h
-index d68263272..10a3905ef 100644
+index d682632..10a3905 100644
 --- a/include/media/stagefright/ACodec.h
 +++ b/include/media/stagefright/ACodec.h
 @@ -351,6 +351,9 @@ protected:
@@ -781,7 +715,7 @@ index d68263272..10a3905ef 100644
      status_t freeOutputBuffersNotOwnedByComponent();
      BufferInfo *dequeueBufferFromNativeWindow();
 diff --git a/include/media/stagefright/CameraSource.h b/include/media/stagefright/CameraSource.h
-index c2e75a61c..f39688fe1 100644
+index c2e75a6..f39688f 100644
 --- a/include/media/stagefright/CameraSource.h
 +++ b/include/media/stagefright/CameraSource.h
 @@ -89,7 +89,7 @@ public:
@@ -794,7 +728,7 @@ index c2e75a61c..f39688fe1 100644
      virtual ~CameraSource();
  
 diff --git a/include/media/stagefright/ColorConverter.h b/include/media/stagefright/ColorConverter.h
-index 270c80966..cf0cda5af 100644
+index 270c809..cf0cda5 100644
 --- a/include/media/stagefright/ColorConverter.h
 +++ b/include/media/stagefright/ColorConverter.h
 @@ -82,6 +82,10 @@ private:
@@ -809,7 +743,7 @@ index 270c80966..cf0cda5af 100644
      ColorConverter &operator=(const ColorConverter &);
  };
 diff --git a/include/media/stagefright/MediaBufferGroup.h b/include/media/stagefright/MediaBufferGroup.h
-index 30514062d..d2a7d890f 100644
+index 3051406..d2a7d89 100644
 --- a/include/media/stagefright/MediaBufferGroup.h
 +++ b/include/media/stagefright/MediaBufferGroup.h
 @@ -29,7 +29,12 @@ class MetaData;
@@ -841,7 +775,7 @@ index 30514062d..d2a7d890f 100644
      size_t buffers() const { return mBuffers.size(); }
  
 diff --git a/include/media/stagefright/MediaCodec.h b/include/media/stagefright/MediaCodec.h
-index 05f65819f..b78b047c9 100644
+index 05f6581..b78b047 100644
 --- a/include/media/stagefright/MediaCodec.h
 +++ b/include/media/stagefright/MediaCodec.h
 @@ -46,12 +46,23 @@ class Surface;
@@ -870,7 +804,7 @@ index 05f65819f..b78b047c9 100644
      };
 diff --git a/include/media/stagefright/dpframework/DpBlitStream.h b/include/media/stagefright/dpframework/DpBlitStream.h
 new file mode 100644
-index 000000000..787dfac29
+index 0000000..787dfac
 --- /dev/null
 +++ b/include/media/stagefright/dpframework/DpBlitStream.h
 @@ -0,0 +1,243 @@
@@ -1119,7 +1053,7 @@ index 000000000..787dfac29
 +#endif  // __DP_BLIT_STREAM_H__
 diff --git a/include/media/stagefright/dpframework/DpDataType.h b/include/media/stagefright/dpframework/DpDataType.h
 new file mode 100644
-index 000000000..d858e9727
+index 0000000..d858e97
 --- /dev/null
 +++ b/include/media/stagefright/dpframework/DpDataType.h
 @@ -0,0 +1,450 @@
@@ -1574,7 +1508,7 @@ index 000000000..d858e9727
 +
 +#endif  // __DP_DATA_TYPE_H__
 diff --git a/media/libmedia/Android.mk b/media/libmedia/Android.mk
-index df4e4b6f6..02413d7f5 100644
+index df4e4b6..02413d7 100644
 --- a/media/libmedia/Android.mk
 +++ b/media/libmedia/Android.mk
 @@ -101,5 +101,17 @@ LOCAL_CFLAGS += -Werror -Wno-error=deprecated-declarations -Wall
@@ -1596,7 +1530,7 @@ index df4e4b6f6..02413d7f5 100644
  include $(BUILD_SHARED_LIBRARY)
  
 diff --git a/media/libmedia/MediaProfiles.cpp b/media/libmedia/MediaProfiles.cpp
-index dd72c16a5..d5b331eaa 100644
+index dd72c16..d5b331e 100644
 --- a/media/libmedia/MediaProfiles.cpp
 +++ b/media/libmedia/MediaProfiles.cpp
 @@ -47,6 +47,9 @@ const MediaProfiles::NameToTagMap MediaProfiles::sAudioEncoderNameMap[] = {
@@ -1663,7 +1597,7 @@ index dd72c16a5..d5b331eaa 100644
  #if LOG_NDEBUG
 diff --git a/media/libmedia/mtkaudio_stubs.cpp b/media/libmedia/mtkaudio_stubs.cpp
 new file mode 100644
-index 000000000..02e0058df
+index 0000000..02e0058
 --- /dev/null
 +++ b/media/libmedia/mtkaudio_stubs.cpp
 @@ -0,0 +1,218 @@
@@ -1886,7 +1820,7 @@ index 000000000..02e0058df
 +
 +} // namespace
 diff --git a/media/libmediaplayerservice/StagefrightRecorder.cpp b/media/libmediaplayerservice/StagefrightRecorder.cpp
-index a6558ab3d..7c1750b34 100644
+index a6558ab..7c1750b 100644
 --- a/media/libmediaplayerservice/StagefrightRecorder.cpp
 +++ b/media/libmediaplayerservice/StagefrightRecorder.cpp
 @@ -1499,7 +1499,7 @@ status_t StagefrightRecorder::setupCameraSource(
@@ -1899,7 +1833,7 @@ index a6558ab3d..7c1750b34 100644
      AVUtils::get()->cacheCaptureBuffers(mCamera, mVideoEncoder);
      mCamera.clear();
 diff --git a/media/libstagefright/ACodec.cpp b/media/libstagefright/ACodec.cpp
-index 92e2847e6..7b4bb4ad8 100644
+index a11494d..ea64201 100644
 --- a/media/libstagefright/ACodec.cpp
 +++ b/media/libstagefright/ACodec.cpp
 @@ -85,6 +85,17 @@
@@ -1973,7 +1907,7 @@ index 92e2847e6..7b4bb4ad8 100644
      CHECK_EQ((int)info->mStatus, (int)BufferInfo::OWNED_BY_US);
  
 diff --git a/media/libstagefright/Android.mk b/media/libstagefright/Android.mk
-index e708f68ae..75c5a0c79 100644
+index e708f68..75c5a0c 100644
 --- a/media/libstagefright/Android.mk
 +++ b/media/libstagefright/Android.mk
 @@ -165,6 +165,10 @@ ifeq ($(TARGET_OMX_LEGACY_RESCALING),true)
@@ -2006,7 +1940,7 @@ index e708f68ae..75c5a0c79 100644
  
  LOCAL_MODULE_TAGS := optional
 diff --git a/media/libstagefright/CameraSource.cpp b/media/libstagefright/CameraSource.cpp
-index bb4ea4108..eeb565ebf 100644
+index 8707d96..8f542bf 100644
 --- a/media/libstagefright/CameraSource.cpp
 +++ b/media/libstagefright/CameraSource.cpp
 @@ -44,6 +44,10 @@
@@ -2050,7 +1984,7 @@ index bb4ea4108..eeb565ebf 100644
          createVideoBufferMemoryHeap(sizeof(VideoNativeHandleMetadata), kDefaultVideoBufferCount);
      }
 diff --git a/media/libstagefright/MediaSource.cpp b/media/libstagefright/MediaSource.cpp
-index a17757a8e..6d79ad635 100644
+index a17757a..6d79ad6 100644
 --- a/media/libstagefright/MediaSource.cpp
 +++ b/media/libstagefright/MediaSource.cpp
 @@ -23,3 +23,21 @@ MediaSource::MediaSource() {}
@@ -2077,7 +2011,7 @@ index a17757a8e..6d79ad635 100644
 +}
 diff --git a/media/libstagefright/OMXCodec.cpp b/media/libstagefright/OMXCodec.cpp
 new file mode 100644
-index 000000000..de00ff282
+index 0000000..de00ff2
 --- /dev/null
 +++ b/media/libstagefright/OMXCodec.cpp
 @@ -0,0 +1,4549 @@
@@ -6631,7 +6565,7 @@ index 000000000..de00ff282
 +
 +}  // namespace android
 diff --git a/media/libstagefright/colorconversion/Android.mk b/media/libstagefright/colorconversion/Android.mk
-index 0bf9701c8..334aa7e5e 100644
+index 0bf9701..334aa7e 100644
 --- a/media/libstagefright/colorconversion/Android.mk
 +++ b/media/libstagefright/colorconversion/Android.mk
 @@ -13,6 +13,13 @@ LOCAL_C_INCLUDES := \
@@ -6649,7 +6583,7 @@ index 0bf9701c8..334aa7e5e 100644
  LOCAL_CLANG := true
  LOCAL_SANITIZE := signed-integer-overflow
 diff --git a/media/libstagefright/colorconversion/ColorConverter.cpp b/media/libstagefright/colorconversion/ColorConverter.cpp
-index 3ca7cc05c..9367e452e 100644
+index 3ca7cc0..9367e45 100644
 --- a/media/libstagefright/colorconversion/ColorConverter.cpp
 +++ b/media/libstagefright/colorconversion/ColorConverter.cpp
 @@ -26,6 +26,14 @@
@@ -6784,7 +6718,7 @@ index 3ca7cc05c..9367e452e 100644
 +
  }  // namespace android
 diff --git a/media/libstagefright/foundation/MediaBufferGroup.cpp b/media/libstagefright/foundation/MediaBufferGroup.cpp
-index 8e4d0641c..97c807f94 100644
+index 8e4d064..97c807f 100644
 --- a/media/libstagefright/foundation/MediaBufferGroup.cpp
 +++ b/media/libstagefright/foundation/MediaBufferGroup.cpp
 @@ -31,7 +31,11 @@ constexpr T MIN(const T &a, const T &b) { return a <= b ? a : b; }
@@ -6814,10 +6748,10 @@ index 8e4d0641c..97c807f94 100644
          MediaBuffer **out, bool nonBlocking, size_t requestedSize) {
      Mutex::Autolock autoLock(mLock);
 diff --git a/services/audioflinger/Threads.cpp b/services/audioflinger/Threads.cpp
-index facfc860c..dfb98888a 100644
+index e8c80c1..0c36293 100644
 --- a/services/audioflinger/Threads.cpp
 +++ b/services/audioflinger/Threads.cpp
-@@ -6469,20 +6469,21 @@ reacquire_wakelock:
+@@ -6463,20 +6463,21 @@ reacquire_wakelock:
          mTimestamp.mTimeNs[ExtendedTimestamp::LOCATION_SERVER] = systemTime();
  
          // Update server timestamp with kernel stats
@@ -6854,7 +6788,7 @@ index facfc860c..dfb98888a 100644
          // ALOGD("%s", mTimestamp.toString().c_str());
  
 diff --git a/services/camera/libcameraservice/api1/CameraClient.cpp b/services/camera/libcameraservice/api1/CameraClient.cpp
-index b02d8f967..a53469d54 100644
+index b02d8f9..a53469d 100644
 --- a/services/camera/libcameraservice/api1/CameraClient.cpp
 +++ b/services/camera/libcameraservice/api1/CameraClient.cpp
 @@ -30,6 +30,13 @@ namespace android {
@@ -6996,7 +6930,7 @@ index b02d8f967..a53469d54 100644
  void CameraClient::handleShutter(void) {
      if (mPlayShutterSound) {
 diff --git a/services/camera/libcameraservice/api1/CameraClient.h b/services/camera/libcameraservice/api1/CameraClient.h
-index 55f64aaf0..19f3ff51c 100644
+index 55f64aa..19f3ff5 100644
 --- a/services/camera/libcameraservice/api1/CameraClient.h
 +++ b/services/camera/libcameraservice/api1/CameraClient.h
 @@ -104,6 +104,11 @@ private:
