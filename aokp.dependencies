@@ -7,8 +7,14 @@
   },
   {
     "remote": "github",
-    "repository": "tribual/android_kernel_elephone_p9000",
+    "repository": "aokp/kernel_elephone_p9000",
     "target_path": "kernel/elephone/p9000",
-    "branch": "aokp7"
+    "branch": "nougat"
+  },
+  {
+    "remote": "github",
+    "repository": "LineageOS/android_packages_resources_devicesettings",
+    "target_path": "packages/resources/devicesettings",
+    "branch": "cm-14.1"
   }
 ] 
