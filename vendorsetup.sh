@@ -23,3 +23,21 @@
 for var in eng user userdebug; do
   add_lunch_combo aokp_p9000-$var
 done
+
+echo $1
+rootdirectory="$PWD"
+# ---------------------------------
+
+dirs="frameworks/av frameworks/base frameworks/native system/core system/netd"
+
+for dir in $dirs ; do
+	cd $rootdirectory
+	cd $dir
+	echo "Applying $dir patches..."
+	git apply $rootdirectory/device/elephone/p9000/patches/$dir/*.patch
+	echo " "
+done
+
+# -----------------------------------
+echo "Changing to build directory..."
+cd $rootdirectory
