@@ -50,6 +50,9 @@ ro.sys.fw.dex2oat_thread_count=3
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 
+# SdcardFs
+ro.sys.sdcardfs=true
+
 # Tweaks and Add On's
 ro.media.enc.jpeg.quality=100
 ro.ril.enable.amr.wideband=1
